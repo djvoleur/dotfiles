@@ -32,9 +32,10 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 call plug#end()
 
-colorscheme nightfox
+colorscheme catppuccin
 highlight Normal guibg=none
 
 " mode lhs rhs
