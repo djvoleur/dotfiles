@@ -35,6 +35,7 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 call plug#end()
 
+let g:catppuccin_flavour = "mocha" " latte, frappe, macchiato, mocha, dusk
 colorscheme catppuccin
 highlight Normal guibg=none
 
