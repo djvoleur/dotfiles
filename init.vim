@@ -22,7 +22,9 @@ set colorcolumn=80
 set signcolumn=yes
 set completeopt=menuone,noinsert,noselect
 
-call plug#begin('~/.config/nvim')
+" call plug#begin('~/.config/nvim')
+" Plugins will be downloaded under the specified directory.
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'darrikonn/vim-gofmt'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -32,6 +34,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'simrat39/rust-tools.nvim'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 call plug#end()
 
@@ -63,6 +66,52 @@ augroup END
 " pyright
 lua <<EOF
 require'lspconfig'.pyright.setup{}
+EOF
+
+" Rust LSP
+" https://github.com/simrat39/rust-tools.nvim#configuration
+lua <<EOF
+local opts = {
+  -- rust-tools options
+  tools = {
+    autoSetHints = true,
+    hover_with_actions = true,
+    inlay_hints = {
+      show_parameter_hints = true,
+      parameter_hints_prefix = "",
+      other_hints_prefix = "",
+      },
+    },
+
+  -- all the opts to send to nvim-lspconfig
+  -- these override the defaults set by rust-tools.nvim
+  -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+  -- https://rust-analyzer.github.io/manual.html#features
+  server = {
+    settings = {
+      ["rust-analyzer"] = {
+        assist = {
+          importEnforceGranularity = true,
+          importPrefix = "crate"
+          },
+        cargo = {
+          allFeatures = true
+          },
+        checkOnSave = {
+          -- default: `cargo check`
+          command = "clippy"
+          },
+        },
+        inlayHints = {
+          lifetimeElisionHints = {
+            enable = true,
+            useParameterNames = true
+          },
+        },
+      }
+    },
+}
+require('rust-tools').setup(opts)
 EOF
 
 " gopls - go install golang.org/x/tools/gopls@latest
