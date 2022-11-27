@@ -60,6 +60,11 @@ augroup ME
     autocmd BufWritePre * :call TrimWhitespace()
 augroup END
 
+" pyright
+lua <<EOF
+require'lspconfig'.pyright.setup{}
+EOF
+
 " gopls - go install golang.org/x/tools/gopls@latest
 lua <<EOF
   lspconfig = require "lspconfig"
