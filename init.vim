@@ -1,6 +1,8 @@
 let g:netrw_browse_split = 0
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+let g:terraform_fmt_on_save = 1
+let g:terraform_align = 1
 
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -39,6 +41,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'simrat39/rust-tools.nvim'
+Plug 'hashivim/vim-terraform'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 call plug#end()
 
@@ -56,16 +59,38 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+nnoremap <leader>rp :py3file %<cr>
+
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
 
-augroup ME
+augroup menu
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
 augroup END
+
+augroup TERRAFORM
+    silent!
+    autocmd! filetypedetect BufRead,BufNewFile *.tf
+    autocmd BufRead,BufNewFile *.hcl set filetype=hcl
+    autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl
+    autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform
+    autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json
+augroup END
+
+lua <<EOF
+-- setup terraform-ls
+require'lspconfig'.terraformls.setup{}
+EOF
+
+lua <<EOF
+--setup tflint
+require'lspconfig'.tflint.setup{}
+EOF
+
 
 lua <<EOF
   -- Set up nvim-cmp.
