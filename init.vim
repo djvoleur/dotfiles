@@ -190,9 +190,12 @@ EOF
 lua <<EOF
 -- golang.org/x/tools/gopls@latest
   lspconfig = require "lspconfig"
+  util = require "lspconfig/util"
+
   lspconfig.gopls.setup {
     capabilities = capabilities,
     cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod"},
     settings = {
       gopls = {
         analyses = {
