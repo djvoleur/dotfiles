@@ -39,7 +39,6 @@ Plug 'nvim-treesitter/playground'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'EdenEast/nightfox.nvim'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'hashivim/vim-terraform'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
