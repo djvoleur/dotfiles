@@ -12,3 +12,9 @@ autocmd({"BufWritePre"}, {
     pattern = "*",
     command = "%s/\\s\\+$//e",
 })
+
+autocmd({"BufWritePre"}, {
+    group = ThePrimeagenGroup,
+    pattern = "*",
+    command = vim.lsp.buf.formatting_sync(nil, 100)
+})
