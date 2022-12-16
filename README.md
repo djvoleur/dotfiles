@@ -1,8 +1,3 @@
-1.  Install https://github.com/junegunn/vim-plug/
+1.  Run setup.sh
 
-```
-sh -c 'curl -fLo "$HOME/.config/nvim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
-
-2.  :PlugInstall
+2.  :PackerUpdate / :PackerSync
