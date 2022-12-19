@@ -96,6 +96,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- [[ Setting options ]]
 -- See `:help vim.o`
 vim.opt.guicursor = ''
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -138,6 +141,7 @@ vim.g.maplocalleader = ' '
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
