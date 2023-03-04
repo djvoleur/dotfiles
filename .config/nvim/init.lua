@@ -23,6 +23,11 @@ require('packer').startup(function(use)
     },
   }
 
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v1.x',
+  }
+
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
@@ -120,7 +125,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 50
 vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
@@ -142,7 +147,7 @@ vim.g.maplocalleader = ' '
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd [[ Ex ]])
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -169,6 +174,9 @@ require('lualine').setup {
     section_separators = '',
   },
 }
+
+-- Enable harpoon
+require('harpoon').setup()
 
 -- Enable Comment.nvim
 require('Comment').setup()
@@ -360,7 +368,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'bashls', 'rust_analyzer', 'pyright', 'sumneko_lua', 'gopls', 'terraformls' }
+local servers = { 'bashls', 'rust_analyzer', 'pyright', 'lua_ls', 'gopls', 'terraformls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -388,17 +396,17 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').sumneko_lua.setup {
+require('lsp-zero').configure('lua_ls', {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
     Lua = {
-      runtime = {
+      --runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT)
-        version = 'LuaJIT',
+      --  version = 'LuaJIT',
         -- Setup your lua path
-        path = runtime_path,
-      },
+      --  path = runtime_path,
+      --},
       diagnostics = {
         globals = { 'vim' },
       },
@@ -407,7 +415,7 @@ require('lspconfig').sumneko_lua.setup {
       telemetry = { enable = false },
     },
   },
-}
+})
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
