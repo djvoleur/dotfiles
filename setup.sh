@@ -4,7 +4,7 @@ OS=$(grep "ID" /etc/os-release | head -n 1 | cut -d "=" -f 2)
 export GIT_EDITOR=nvim
 
 if [ "$OS" == "fedora" ]; then
-   sudo dnf install -y golang rust-analyzer npm gcc-c++ git powerline-fonts
+   sudo dnf install -y golang rust-analyzer npm gcc-c++ git
 fi
 
 if [ ! -d "$HOME/.config/nvim" ]; then
