@@ -1,10 +1,10 @@
 #!/bin/bash
-
 dir=$('pwd')
 OS=$(grep "ID" /etc/os-release | head -n 1 | cut -d "=" -f 2)
+export GIT_EDITOR=nvim
 
 if [ "$OS" == "fedora" ]; then
-   sudo dnf install -y golang rust-analyzer npm gcc-c++
+   sudo dnf install -y golang rust-analyzer npm gcc-c++ git
 fi
 
 if [ ! -d "$HOME/.config/nvim" ]; then
@@ -17,3 +17,5 @@ if [ -L $HOME/.config/nvim/init.lua ] && [ -f $HOME/.config/nvim/init.lua ]; the
 else
   ln -s ${dir}/.config/nvim/init.lua $HOME/.config/nvim/init.lua
 fi
+
+git config --global core.editor "nvim"
