@@ -45,6 +45,10 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  use {
+    "williamboman/mason.nvim",
+    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+  }
   -- harpoon
   use 'theprimeagen/harpoon'
 
