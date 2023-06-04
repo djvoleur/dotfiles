@@ -9,11 +9,6 @@ if [ "$OS" == "fedora" ]; then
   /usr/bin/python3 -m pip install pynvim
 fi
 
-# Setup zsh-autosuggestions
-if [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-
 if [[ "$OS" =~ "solus" ]]; then
   sudo eopkg it -c system.devel
   sudo eopkg it -y golang nodejs gcc g++ fd ripgrep pip zsh neovim rustup numix-icon-theme-circle materia-gtk-theme-dark-compact
@@ -31,11 +26,19 @@ fi
 mkdir -p $HOME/.config/nvim
 
 rm -f $HOME/.config/nvim/init.lua
-rm -f $HOME/.zshrc
 ln -s ${dir}/config/nvim/init.lua $HOME/.config/nvim/init.lua
-ln -s ${dir}/.zshrc $HOME/.zshrc
 
 git config --global core.editor "nvim"
 
+# Setup oh-my-zsh
+rm -f $HOME/.zshrc
 rm -rf $HOME/.oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+rm -rf $HOME/.zshrc.pre-oh-my-zsh*
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+rm -f $HOME/.zshrc
+ln -s ${dir}/config/.zshrc $HOME/.zshrc
+
+# Setup zsh-autosuggestions
+if [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
