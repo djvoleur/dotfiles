@@ -26,6 +26,13 @@ if [[ "$OS" =~ "solus" ]]; then
   # and retry
 fi
 
+# Setup Powerline fonts
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+
 mkdir -p $HOME/.config/nvim
 
 rm -f $HOME/.config/nvim/init.lua
