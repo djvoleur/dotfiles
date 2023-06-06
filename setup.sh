@@ -5,8 +5,11 @@ export GIT_EDITOR=nvim
 
 if [ "$OS" == "fedora" ]; then
   # Setup for neovim
-  sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo python3-pip zsh
+  sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo python3-pip zsh kitty
   /usr/bin/python3 -m pip install pynvim
+  sudo npm install -g npm@9.6.7
+  sudo npm install -g neovim
+  sudo npm install -g tree-sitter-cli
 fi
 
 if [[ "$OS" =~ "solus" ]]; then
