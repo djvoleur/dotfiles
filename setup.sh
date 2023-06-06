@@ -5,7 +5,7 @@ export GIT_EDITOR=nvim
 
 if [ "$OS" == "fedora" ]; then
   # Setup for neovim
-  sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo python3-pip zsh kitty
+  sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo python3-pip zsh kitty neovim
   /usr/bin/python3 -m pip install pynvim
   sudo npm install -g npm@9.6.7
   sudo npm install -g neovim
