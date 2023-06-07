@@ -15,6 +15,7 @@ if [ "$OS" == "fedora" ]; then
   cd auto-cpufreq
   sudo ./auto-cpufreq-installer
   rm -rf auto-cpufreq
+  sudo auto-cpufreq --install
 fi
 
 if [[ "$OS" =~ "solus" ]]; then
