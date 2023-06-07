@@ -10,6 +10,11 @@ if [ "$OS" == "fedora" ]; then
   sudo npm install -g npm@9.6.7
   sudo npm install -g neovim
   sudo npm install -g tree-sitter-cli
+  # Setup auto-cpufreq
+  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+  cd auto-cpufreq
+  sudo ./auto-cpufreq-installer
+  rm -rf auto-cpufreq
 fi
 
 if [[ "$OS" =~ "solus" ]]; then
