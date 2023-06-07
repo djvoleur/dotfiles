@@ -56,7 +56,6 @@ require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
-  
   use 'folke/tokyonight.nvim'
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
@@ -241,7 +240,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'bash', 'go', 'hcl', 'lua', 'python', 'rust' },
+  ensure_installed = { 'bash', 'go', 'hcl', 'lua', 'python', 'rust', 'terraform' },
 
   highlight = { enable = true },
   indent = { enable = true },
@@ -372,11 +371,12 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'rust_analyzer', 'lua_ls', 'gopls', 'bashls', 'pylsp' }
+local servers = { 'rust_analyzer', 'lua_ls', 'gopls', 'bashls', 'pylsp', 'terraformls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
   ensure_installed = servers,
+  automatic_installation = true
 }
 
 -- nvim-cmp supports additional completion capabilities
@@ -387,6 +387,7 @@ for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
+    defaults = true
   }
 end
 
