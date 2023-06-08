@@ -5,7 +5,8 @@ export GIT_EDITOR=nvim
 
 if [ "$OS" == "fedora" ]; then
   # Setup for neovim
-  sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo python3-pip zsh kitty neovim numix-icon-theme-circle
+  sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo python3-pip zsh kitty neovim numix-icon-theme-circle \
+    gnome-tweaks
   /usr/bin/python3 -m pip install pynvim
   sudo npm install -g npm@9.6.7
   sudo npm install -g neovim
@@ -14,8 +15,9 @@ if [ "$OS" == "fedora" ]; then
   git clone https://github.com/AdnanHodzic/auto-cpufreq.git
   cd auto-cpufreq
   sudo ./auto-cpufreq-installer
-  rm -rf auto-cpufreq
+  cd .. && sudo rm -rf auto-cpufreq
   sudo auto-cpufreq --install
+  sudo dnf update -y
 fi
 
 if [[ "$OS" =~ "solus" ]]; then
