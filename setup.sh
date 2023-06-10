@@ -10,26 +10,29 @@ fi
 if [[ "$OS" =~ "Linux" ]]; then
   if [ "$FLAVOR" == "fedora" ]; then
     # Setup for neovim
-    sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo python3-pip zsh kitty neovim numix-icon-theme-circle \
-      gnome-tweaks
-    # Setup auto-cpufreq
-    git clone https://github.com/AdnanHodzic/auto-cpufreq.git
-    cd auto-cpufreq
-    sudo ./auto-cpufreq-installer
-    cd .. && sudo rm -rf auto-cpufreq
-    sudo auto-cpufreq --install
+    sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo \
+      python3-pip zsh kitty neovim numix-icon-theme-circle gnome-tweaks
     sudo dnf update -y
   fi
 
   if [[ "$FLAVOR" =~ "solus" ]]; then
     sudo eopkg it -c system.devel
-    sudo eopkg it -y golang nodejs gcc g++ fd ripgrep pip zsh neovim rustup numix-icon-theme-circle materia-gtk-theme-dark-compact
+    sudo eopkg it -y golang nodejs gcc g++ fd ripgrep pip zsh neovim rustup \
+      numix-icon-theme-circle materia-gtk-theme-dark-compact
     rustup default stable
     # Before of installation fails with lock file for neovim
     # Delete files here - ~/.local/share/nvim/mason/staging
     # and retry
+    sudo eopkg up
   fi
+
+  # Setup auto-cpufreq
+  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+  cd auto-cpufreq
+  sudo ./auto-cpufreq-installer
+  cd .. && sudo rm -rf auto-cpufreq
   
+  sudo auto-cpufreq --install
   sudo pip install --upgrade pip
   python3 -m pip install pynvim
 
@@ -45,7 +48,7 @@ if [[ "$OS" =~ "Darwin" ]]; then
 fi
 
 # Setup npm
-sudo npm install -g npm@9.6.7
+sudo npm install -g npm@latest
 sudo npm install -g neovim
 sudo npm install -g tree-sitter-cli
 
