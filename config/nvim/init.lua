@@ -102,6 +102,10 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 -- [[ Setting options ]]
+-- Disable providers
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
 -- See `:help vim.o`
 vim.opt.guicursor = ''
 vim.g.netrw_browse_split = 0
