@@ -37,7 +37,7 @@ fi
 
 if [[ "$OS" =~ "Darwin" ]]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew install neovim ripgrep fd rust npm
+  brew install neovim ripgrep fd rust npm kitty
   python3.11 -m pip install --upgrade pip
   python3.11 -m pip install pynvim
   brew update
