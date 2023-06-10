@@ -63,6 +63,10 @@ ln -s ${dir}/config/nvim/init.lua $HOME/.config/nvim/init.lua
 
 git config --global core.editor "nvim"
 
+# Setup Kitty
+rm -f $HOME/.config/kitty/kitty.conf
+ln -s ${dir}/config/kitty/kitty.conf $HOME/.config/kitty/kitty.conf
+
 # Setup oh-my-zsh
 rm -f $HOME/.zshrc
 rm -rf $HOME/.oh-my-zsh
