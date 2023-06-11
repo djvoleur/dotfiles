@@ -26,6 +26,16 @@ if [[ "$OS" =~ "Linux" ]]; then
     sudo eopkg up
   fi
 
+  if [[ "$FLAVOR" =~ "ubuntu" ]]; then
+    sudo add-apt-repository ppa:neovim-ppa/unstable -y
+    sudo apt update -y
+    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
+    sudo apt install -y build-essential nodejs fd-find ripgrep rust-all zsh neovim \
+      python3-pip
+    sudo apt upgrade -y
+    sudo apt autoremove -y
+  fi
+
   # Setup auto-cpufreq
   git clone https://github.com/AdnanHodzic/auto-cpufreq.git
   cd auto-cpufreq
