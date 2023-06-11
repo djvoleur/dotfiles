@@ -11,7 +11,7 @@ if [[ "$OS" =~ "Linux" ]]; then
   if [ "$FLAVOR" == "fedora" ]; then
     # Setup for neovim
     sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo \
-      python3-pip zsh kitty neovim numix-icon-theme-circle gnome-tweaks
+      python3-pip zsh kitty neovim numix-icon-theme-circle gnome-tweaks budgie-desktop
     sudo dnf update -y
   fi
 
