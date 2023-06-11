@@ -18,7 +18,7 @@ if [[ "$OS" =~ "Linux" ]]; then
   if [[ "$FLAVOR" =~ "solus" ]]; then
     sudo eopkg it -c system.devel
     sudo eopkg it -y golang nodejs gcc g++ fd ripgrep pip zsh neovim rustup \
-      numix-icon-theme-circle materia-gtk-theme-dark-compact
+      numix-icon-theme-circle materia-gtk-theme-dark-compact kitty
     rustup default stable
     # Before of installation fails with lock file for neovim
     # Delete files here - ~/.local/share/nvim/mason/staging
