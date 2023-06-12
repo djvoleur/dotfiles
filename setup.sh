@@ -32,7 +32,7 @@ if [[ "$OS" =~ "Linux" ]]; then
     sudo apt update -y
     curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
     sudo apt install -y build-essential nodejs fd-find ripgrep rust-all zsh neovim \
-      python3-pip
+      python3-pip python3-venv golang unzip
     sudo apt upgrade -y
     sudo apt autoremove -y
   fi
@@ -44,7 +44,7 @@ if [[ "$OS" =~ "Linux" ]]; then
   cd .. && sudo rm -rf auto-cpufreq
   
   sudo auto-cpufreq --install
-  sudo pip install --upgrade pip
+  pip install --upgrade pip
   python3 -m pip install pynvim
 
 fi
