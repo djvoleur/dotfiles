@@ -9,11 +9,19 @@ fi
 
 if [[ "$OS" =~ "Linux" ]]; then
   if [ "$FLAVOR" == "fedora" ]; then
-    # Setup for neovim
+    # Setup third party repositories
+    sudo dnf install \
+    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+    sudo dnf install \
+    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  
+    # Install packages
     sudo dnf install -y golang rust-analyzer npm gcc-c++ git fd-find ripgrep cargo \
-      python3-pip zsh kitty neovim numix-icon-theme-circle gnome-tweaks budgie-desktop \
-      openh264
+    python3-pip zsh kitty neovim numix-icon-theme-circle gnome-tweaks budgie-desktop \
+    openh264 snapd
     sudo dnf update -y
+    sudo ln -s /var/lib/snapd/snap /snap
+    snap install spotify
   fi
 
   if [[ "$FLAVOR" =~ "solus" ]]; then
